@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imgLogin"
+        android:layout_width="212dp"
+        android:layout_height="212dp"
+        android:src="@drawable/login"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="343dp"
+        android:layout_height="42dp"
+        android:text="Welcome Back!"
+        android:gravity="center"
+        android:textSize="36dp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgLogin"/>
+    <EditText
+        android:id="@+id/edtLogin"
+        android:drawableLeft="@drawable/ic_baseline_person_24"
+        android:textColorHint="#2196F3"
+        android:padding="10dp"
+        android:drawablePadding="5dp"
+        android:hint="example@email.com"
+        android:background="@drawable/background_text"
+        android:layout_marginTop="20dp"
+        android:layout_width="343dp"
+        android:layout_height="50dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle"/>
+    <EditText
+        android:id="@+id/edtPass"
+        android:drawableLeft="@drawable/ic_baseline_lock_24"
+        android:textColorHint="#C3CCD3"
+        android:padding="10dp"
+        android:drawablePadding="5dp"
+        android:hint="password"
+        android:background="@drawable/background_pass"
+        android:layout_marginTop="25dp"
+        android:layout_width="343dp"
+        android:layout_height="50dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtLogin"/>
+
+    <TextView
+        android:id="@+id/txtResetPass"
+        android:layout_width="137dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="32dp"
+        android:text="Forgot Password?"
+        android:textSize="16dp"
+        android:clickable="true"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtPass" />
+    <androidx.cardview.widget.CardView
+        android:layout_width="343dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        app:cardBackgroundColor="#235E8E"
+        app:cardCornerRadius="13dp"
+        android:id="@+id/cardviewLogin"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtPass">
+        <TextView
+            android:text="Login"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/txtSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="60dp"
+        android:text="Sign Up?"
+        android:textSize="16dp"
+        android:textColor="#0829E3"
+        android:clickable="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/txtConnectToSocial"
+        app:layout_constraintTop_toBottomOf="@+id/cardviewLogin" />
+    <TextView
+        android:id="@+id/txtConnectToSocial"
+        android:layout_width="158dp"
+        android:layout_height="19dp"
+        android:layout_marginTop="10dp"
+        android:text="or connect to social"
+        android:textSize="16dp"
+        app:layout_constraintLeft_toRightOf="@id/txtSignUp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardviewLogin" />
+    <Button
+        android:id="@+id/btnFacebook"
+        android:layout_width="165dp"
+        android:background="@drawable/background_button_facebook"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:text="Facebook"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintRight_toLeftOf="@id/btnGoogle"
+        app:layout_constraintTop_toBottomOf="@+id/txtConnectToSocial"/>
+    <Button
+        android:id="@+id/btnGoogle"
+        android:layout_width="165dp"
+        android:background="@drawable/background_button_google"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:text="Google"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/btnFacebook"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtConnectToSocial"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
