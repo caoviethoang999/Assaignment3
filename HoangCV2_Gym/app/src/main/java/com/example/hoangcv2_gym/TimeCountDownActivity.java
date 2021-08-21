@@ -20,11 +20,12 @@ import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 public class TimeCountDownActivity extends AppCompatActivity implements View.OnClickListener {
-    private long timeCountInMilliSeconds;
+    private long timeleft;
     String timepass;
     private enum TimerStatus {
         STARTED,
-        STOPPED
+        STOPPED,
+        RESUME
     }
     private TimerStatus timerStatus = TimerStatus.STOPPED;
     private ProgressBar progressBarCircle;
@@ -75,45 +76,55 @@ public class TimeCountDownActivity extends AppCompatActivity implements View.OnC
     }
     private void reset() {
         stopCountDownTimer();
-        startCountDownTimer();
+        timerStatus = TimerStatus.STARTED;
+        imageViewStartStop.setImageResource(R.drawable.icon_stop);
+        startCountDownTimer(setTimerValues());
     }
     private void startStop() {
         if (timerStatus == TimerStatus.STOPPED) {
-            setTimerValues();
             setProgressBarValues();
             imageViewReset.setVisibility(View.VISIBLE);
             imageViewStartStop.setImageResource(R.drawable.icon_stop);
             editTextMinute.setEnabled(false);
             timerStatus = TimerStatus.STARTED;
-            startCountDownTimer();
+            startCountDownTimer(setTimerValues());
 
-        } else {
-            imageViewReset.setVisibility(View.GONE);
+        }else if (timerStatus == TimerStatus.STARTED){
+            imageViewReset.setVisibility(View.VISIBLE);
             imageViewStartStop.setImageResource(R.drawable.icon_start);
             editTextMinute.setEnabled(true);
-            timerStatus = TimerStatus.STOPPED;
+            timerStatus = TimerStatus.RESUME;
             stopCountDownTimer();
-
+        }else if (timerStatus == TimerStatus.RESUME){
+            imageViewReset.setVisibility(View.GONE);
+            imageViewStartStop.setImageResource(R.drawable.icon_stop);
+            editTextMinute.setEnabled(true);
+            timerStatus = TimerStatus.STARTED;
+            timerResume();
         }
 
     }
-    private void setTimerValues() {
-        int time = converTime(timepass);
-        timeCountInMilliSeconds = time * 60 * 1000;
+    private int setTimerValues() {
+        int time = converTime(timepass)* 60 * 1000;
+        return time;
     }
 
-    private void startCountDownTimer() {
+    private void timerResume() {
+        startCountDownTimer(timeleft);
+    }
+    private void startCountDownTimer(long timerStartFrom) {
 
-        countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 1000) {
+        countDownTimer = new CountDownTimer(timerStartFrom, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
+                timeleft=millisUntilFinished;
                 textViewTime.setText(hmsTimeFormatter(millisUntilFinished));
                 progressBarCircle.setProgress((int) (millisUntilFinished / 1000));
 
             }
             @Override
             public void onFinish() {
-                textViewTime.setText(hmsTimeFormatter(timeCountInMilliSeconds));
+                textViewTime.setText(hmsTimeFormatter(setTimerValues()));
                 setProgressBarValues();
                 imageViewReset.setVisibility(View.GONE);
                 imageViewStartStop.setImageResource(R.drawable.icon_start);
@@ -129,8 +140,8 @@ public class TimeCountDownActivity extends AppCompatActivity implements View.OnC
     }
     private void setProgressBarValues() {
 
-        progressBarCircle.setMax((int) timeCountInMilliSeconds / 1000);
-        progressBarCircle.setProgress((int) timeCountInMilliSeconds / 1000);
+        progressBarCircle.setMax((int) setTimerValues() / 1000);
+        progressBarCircle.setProgress((int) setTimerValues() / 1000);
     }
     private String hmsTimeFormatter(long milliSeconds) {
 
